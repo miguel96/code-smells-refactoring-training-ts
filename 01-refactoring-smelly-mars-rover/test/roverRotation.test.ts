@@ -1,8 +1,7 @@
-import {Rover} from '../src/Rover';
+import { Rover } from "../src/Rover";
 
-describe('Rover Rotation', () => {
-
-  it(' facing north rotate left', () => {
+describe("Rover Rotation", () => {
+  it(" facing north rotate left", () => {
     const rover = new Rover(0, 0, "N");
 
     rover.receive("l");
@@ -10,7 +9,7 @@ describe('Rover Rotation', () => {
     expect(new Rover(0, 0, "W")).toEqual(rover);
   });
 
-  it(' facing north rotate right', () => {
+  it(" facing north rotate right", () => {
     const rover = new Rover(0, 0, "N");
 
     rover.receive("r");
@@ -18,7 +17,7 @@ describe('Rover Rotation', () => {
     expect(new Rover(0, 0, "E")).toEqual(rover);
   });
 
-  it(' facing south rotate left', () => {
+  it(" facing south rotate left", () => {
     const rover = new Rover(0, 0, "S");
 
     rover.receive("l");
@@ -26,7 +25,7 @@ describe('Rover Rotation', () => {
     expect(new Rover(0, 0, "E")).toEqual(rover);
   });
 
-  it(' facing south rotate right', () => {
+  it(" facing south rotate right", () => {
     const rover = new Rover(0, 0, "S");
 
     rover.receive("r");
@@ -34,7 +33,7 @@ describe('Rover Rotation', () => {
     expect(new Rover(0, 0, "W")).toEqual(rover);
   });
 
-  it(' facing west rotate left', () => {
+  it(" facing west rotate left", () => {
     const rover = new Rover(0, 0, "W");
 
     rover.receive("l");
@@ -42,7 +41,7 @@ describe('Rover Rotation', () => {
     expect(new Rover(0, 0, "S")).toEqual(rover);
   });
 
-  it(' facing west rotate right', () => {
+  it(" facing west rotate right", () => {
     const rover = new Rover(0, 0, "W");
 
     rover.receive("r");
@@ -50,7 +49,7 @@ describe('Rover Rotation', () => {
     expect(new Rover(0, 0, "N")).toEqual(rover);
   });
 
-  it(' facing east rotate left', () => {
+  it(" facing east rotate left", () => {
     const rover = new Rover(0, 0, "E");
 
     rover.receive("l");
@@ -58,7 +57,7 @@ describe('Rover Rotation', () => {
     expect(new Rover(0, 0, "N")).toEqual(rover);
   });
 
-  it(' facing east rotate right', () => {
+  it(" facing east rotate right", () => {
     const rover = new Rover(0, 0, "E");
 
     rover.receive("r");

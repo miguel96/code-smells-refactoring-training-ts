@@ -6,7 +6,7 @@ export class Direction {
   }
 
   isFacingNorth() {
-      return this.direction === "N";
+    return this.direction === "N";
   }
 
   isFacingSouth() {
@@ -16,5 +16,4 @@ export class Direction {
   isFacingWest() {
     return this.direction === "W";
   }
-
 }
