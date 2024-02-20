@@ -1,46 +1,42 @@
-export class Rover {
+import {Direction} from "./Direction";
 
-    private direction: string;
+export class Rover {
     private y: number;
     private x: number;
+    private direction: Direction;
 
     constructor(x: number, y: number, direction: string) {
         this.x = x;
         this.y = y;
-        this.direction = direction;
+        this.setDirection(direction);
     }
 
     public receive(commandsSequence: string) {
         for (let i = 0; i < commandsSequence.length; ++i) {
             const command = commandsSequence.substring(i, i + 1);
 
-            if (command === "l" || command === "r") {
+            if (command === "l") {
 
                 // Rotate Rover
-                if (this.direction === "N") {
-                    if (command === "r") {
-                        this.direction = "E";
-                    } else {
-                        this.direction = "W";
-                    }
-                } else if (this.direction === "S") {
-                    if (command === "r") {
-                        this.direction = "W";
-                    } else {
-                        this.direction = "E";
-                    }
-                } else if (this.direction === "W") {
-                    if (command === "r") {
-                        this.direction = "N";
-                    } else {
-                        this.direction = "S";
-                    }
+                if (this.direction.isFacingNorth()) {
+                    this.setDirection('W');
+                } else if (this.direction.isFacingSouth()) {
+                    this.setDirection("E");
+                } else if (this.direction.isFacingWest()) {
+                    this.setDirection("S");
                 } else {
-                    if (command === "r") {
-                        this.direction = "S";
-                    } else {
-                        this.direction = "N";
-                    }
+                    this.setDirection("N");
+                }
+            } else if (command === "r") {
+                // Rotate Rover
+                if (this.direction.isFacingNorth()) {
+                    this.setDirection("E");
+                } else if (this.direction.isFacingSouth()) {
+                    this.setDirection("W");
+                } else if (this.direction.isFacingWest()) {
+                    this.setDirection("N");
+                } else {
+                    this.setDirection("S");
                 }
             } else {
 
@@ -51,12 +47,11 @@ export class Rover {
                     displacement1 = 1;
                 }
                 let displacement = displacement1;
-
-                if (this.direction === "N") {
+                if (this.direction.isFacingNorth()) {
                     this.y += displacement;
-                } else if (this.direction === "S") {
+                } else if (this.direction.isFacingSouth()) {
                     this.y -= displacement;
-                } else if (this.direction === "W") {
+                } else if (this.direction.isFacingWest()) {
                     this.x -= displacement;
                 } else {
                     this.x += displacement;
@@ -65,4 +60,7 @@ export class Rover {
         }
     }
 
+    private setDirection(newDirection: string) {
+        this.direction = new Direction(newDirection);
+    }
 }
