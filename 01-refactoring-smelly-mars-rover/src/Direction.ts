@@ -1,5 +1,5 @@
 export class Direction {
-  private direction: string;
+  private readonly direction: string;
 
   constructor(newDirection: string) {
     this.direction = newDirection;
