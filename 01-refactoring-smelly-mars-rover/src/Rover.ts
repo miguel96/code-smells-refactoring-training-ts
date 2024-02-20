@@ -6,7 +6,7 @@ export class Rover {
   private coordinates: Coordinates;
 
   constructor(x: number, y: number, direction: string) {
-    this.setCoordinates(x, y);
+    this.coordinates = new Coordinates(x, y);
     this.setDirection(direction);
   }
 
@@ -45,25 +45,13 @@ export class Rover {
         }
         let displacement = displacement1;
         if (this.direction.isFacingNorth()) {
-          this.coordinates = new Coordinates(
-            this.coordinates.getX(),
-            this.coordinates.getY() + displacement,
-          );
+          this.coordinates = this.coordinates.moveAlongY(displacement);
         } else if (this.direction.isFacingSouth()) {
-          this.setCoordinates(
-            this.coordinates.getX(),
-            this.coordinates.getY() - displacement,
-          );
+          this.coordinates = this.coordinates.moveAlongY(-displacement);
         } else if (this.direction.isFacingWest()) {
-          this.setCoordinates(
-            this.coordinates.getX() - displacement,
-            this.coordinates.getY(),
-          );
+          this.coordinates = this.coordinates.moveAlongX(-displacement);
         } else {
-          this.setCoordinates(
-            this.coordinates.getX() + displacement,
-            this.coordinates.getY(),
-          );
+          this.coordinates = this.coordinates.moveAlongX(displacement);
         }
       }
     }
@@ -71,9 +59,5 @@ export class Rover {
 
   private setDirection(newDirection: string) {
     this.direction = new Direction(newDirection);
-  }
-
-  private setCoordinates(x: number, y: number) {
-    this.coordinates = new Coordinates(x, y);
   }
 }

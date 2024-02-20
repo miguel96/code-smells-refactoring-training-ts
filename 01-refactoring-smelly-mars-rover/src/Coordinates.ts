@@ -7,11 +7,11 @@ export class Coordinates {
     this.x = x;
   }
 
-  getX() {
-    return this.x;
+  moveAlongY(displacement: number) {
+    return new Coordinates(this.x, this.y + displacement);
   }
 
-  getY() {
-    return this.y;
+  moveAlongX(displacement: number) {
+    return new Coordinates(this.x + displacement, this.y);
   }
 }
