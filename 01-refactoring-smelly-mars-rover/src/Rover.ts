@@ -1,5 +1,5 @@
-import { Direction } from "./Direction";
-import { Coordinates } from "./Coordinates";
+import {Direction} from "./Direction";
+import {Coordinates} from "./Coordinates";
 
 export class Rover {
   private direction: Direction;
@@ -15,18 +15,9 @@ export class Rover {
       const command = commandsSequence.substring(i, i + 1);
 
       if (command === "l") {
-        // Rotate Rover
-        if (this.direction.isFacingNorth()) {
-          this.setDirection("W");
-        } else if (this.direction.isFacingSouth()) {
-          this.setDirection("E");
-        } else if (this.direction.isFacingWest()) {
-          this.setDirection("S");
-        } else {
-          this.setDirection("N");
-        }
+        this.direction = this.direction.rotateLeft()
       } else if (command === "r") {
-        // Rotate Rover
+        // Rotate Rover right
         if (this.direction.isFacingNorth()) {
           this.setDirection("E");
         } else if (this.direction.isFacingSouth()) {
@@ -42,6 +33,7 @@ export class Rover {
 
         if (command === "f") {
           displacement1 = 1;
+
         }
         let displacement = displacement1;
         if (this.direction.isFacingNorth()) {
@@ -56,8 +48,7 @@ export class Rover {
       }
     }
   }
-
   private setDirection(newDirection: string) {
-    this.direction = new Direction(newDirection);
+    this.direction = Direction.create(newDirection);
   }
 }
