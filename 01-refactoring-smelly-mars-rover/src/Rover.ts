@@ -1,7 +1,9 @@
-import {Direction} from "./Direction";
-import {Coordinates} from "./Coordinates";
+import { Direction } from "./Direction";
+import { Coordinates } from "./Coordinates";
 
 export class Rover {
+  private readonly displacement = 1;
+
   private direction: Direction;
   private coordinates: Coordinates;
 
@@ -11,24 +13,27 @@ export class Rover {
   }
 
   public receive(commandsSequence: string) {
-    for (let i = 0; i < commandsSequence.length; ++i) {
-      const command = commandsSequence.substring(i, i + 1);
+    let commands = this.extractCommands(commandsSequence);
+    this.runCommands(commands);
+  }
 
-      if (command === "l") {
-        this.direction = this.direction.rotateLeft()
-      } else if (command === "r") {
-        this.direction = this.direction.rotateRight()
-      } else {
-        // Displace Rover
-        let displacement1 = -1;
+  private extractCommands(commandsSequence: string) {
+    return commandsSequence.split("");
+  }
 
-        if (command === "f") {
-          displacement1 = 1;
+  private runCommands(commands: string[]) {
+    commands.forEach((command) => this.runCommand(command));
+  }
 
-        }
-        let displacement = displacement1;
-        this.move(displacement);
-      }
+  private runCommand(command: string) {
+    if (command === "l") {
+      this.direction = this.direction.rotateLeft();
+    } else if (command === "r") {
+      this.direction = this.direction.rotateRight();
+    } else if (command === "f") {
+      this.move(this.displacement);
+    } else {
+      this.move(-this.displacement);
     }
   }
 
