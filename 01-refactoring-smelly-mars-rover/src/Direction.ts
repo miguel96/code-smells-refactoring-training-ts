@@ -1,23 +1,8 @@
+import {Coordinates} from "./Coordinates";
 
 
 export abstract class Direction{
-  private readonly direction: string;
 
-  constructor(newDirection: string) {
-    this.direction = newDirection;
-  }
-
-  isFacingNorth() {
-    return this.direction === "N";
-  }
-
-  isFacingSouth() {
-    return this.direction === "S";
-  }
-
-  isFacingWest() {
-    return this.direction === "W";
-  }
 
   static create(newDirection: string): Direction {
     if (newDirection === "N") {
@@ -36,12 +21,12 @@ export abstract class Direction{
 
   abstract rotateRight(): Direction
 
+  abstract move(coordinates: Coordinates, displacement: number): Coordinates
+
 }
 class North extends Direction {
 
-  constructor() {
-    super("N");
-  }
+
 
   rotateLeft(): Direction {
    return Direction.create("W");
@@ -50,13 +35,15 @@ class North extends Direction {
   rotateRight(): Direction {
     return Direction.create("E");
   }
+
+  move(coordinates: Coordinates, displacement: number): Coordinates {
+    return coordinates.moveAlongY(displacement);
+  }
 }
 
 class South extends Direction {
 
-  constructor() {
-    super("S");
-  }
+
 
   rotateLeft(): Direction {
     return Direction.create("E");
@@ -65,13 +52,15 @@ class South extends Direction {
   rotateRight(): Direction {
     return Direction.create("W");
   }
+
+  move(coordinates: Coordinates, displacement: number): Coordinates {
+    return coordinates.moveAlongY(-displacement);
+  }
 }
 
 class West extends Direction {
 
-  constructor() {
-    super("W");
-  }
+
 
   rotateLeft(): Direction {
     return Direction.create("S");
@@ -79,14 +68,16 @@ class West extends Direction {
 
   rotateRight(): Direction {
     return Direction.create("N");
+  }
+
+  move(coordinates: Coordinates, displacement: number): Coordinates {
+    return coordinates.moveAlongX(-displacement);
   }
 }
 
 class East extends Direction {
 
-  constructor() {
-    super("E");
-  }
+
 
   rotateLeft(): Direction {
     return Direction.create("N");
@@ -94,5 +85,9 @@ class East extends Direction {
 
   rotateRight(): Direction {
     return Direction.create("S");
+  }
+
+  move(coordinates: Coordinates, displacement: number): Coordinates {
+    return coordinates.moveAlongX(displacement);
   }
 }
