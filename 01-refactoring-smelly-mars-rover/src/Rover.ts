@@ -17,16 +17,7 @@ export class Rover {
       if (command === "l") {
         this.direction = this.direction.rotateLeft()
       } else if (command === "r") {
-        // Rotate Rover right
-        if (this.direction.isFacingNorth()) {
-          this.setDirection("E");
-        } else if (this.direction.isFacingSouth()) {
-          this.setDirection("W");
-        } else if (this.direction.isFacingWest()) {
-          this.setDirection("N");
-        } else {
-          this.setDirection("S");
-        }
+        this.direction = this.direction.rotateRight()
       } else {
         // Displace Rover
         let displacement1 = -1;

@@ -34,6 +34,8 @@ export abstract class Direction{
 
   abstract rotateLeft (): Direction
 
+  abstract rotateRight(): Direction
+
 }
 class North extends Direction {
 
@@ -43,6 +45,10 @@ class North extends Direction {
 
   rotateLeft(): Direction {
    return Direction.create("W");
+  }
+
+  rotateRight(): Direction {
+    return Direction.create("E");
   }
 }
 
@@ -55,6 +61,10 @@ class South extends Direction {
   rotateLeft(): Direction {
     return Direction.create("E");
   }
+
+  rotateRight(): Direction {
+    return Direction.create("W");
+  }
 }
 
 class West extends Direction {
@@ -66,6 +76,10 @@ class West extends Direction {
   rotateLeft(): Direction {
     return Direction.create("S");
   }
+
+  rotateRight(): Direction {
+    return Direction.create("N");
+  }
 }
 
 class East extends Direction {
@@ -76,5 +90,9 @@ class East extends Direction {
 
   rotateLeft(): Direction {
     return Direction.create("N");
+  }
+
+  rotateRight(): Direction {
+    return Direction.create("S");
   }
 }
