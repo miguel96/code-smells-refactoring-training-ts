@@ -1,19 +1,32 @@
 import {Movie} from "./Movie";
 
 export class Rental {
-    constructor(movie: Movie, daysRented: number) {
-        this.movie = movie;
-        this.daysRented = daysRented;
-    }
+  private movie: Movie;
+  private daysRented: number;
 
-    public getDaysRented(): number {
-        return this.daysRented;
-    }
+  constructor(movie: Movie, daysRented: number) {
+    this.movie = movie;
+    this.daysRented = daysRented;
+  }
 
-    public getMovie(): Movie {
-        return this.movie;
-    }
+  public getDaysRented(): number {
+    return this.daysRented;
+  }
 
-    private movie: Movie;
-    private daysRented: number;
+  public getMovie(): Movie {
+    return this.movie;
+  }
+
+  public getMovieTitle() {
+    return this.getMovie().getTitle();
+  }
+
+  calculateAmount(): number {
+    return this.movie.calculateAmount(this.getDaysRented());
+  }
+
+  calculateRenterPoints(): number {
+    return this.movie.calculateRenterPoints(this.getDaysRented());
+  }
+
 }

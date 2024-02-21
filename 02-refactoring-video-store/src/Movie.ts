@@ -11,7 +11,7 @@ export class Movie {
         this.priceCode = priceCode;
     }
 
-    public getPriceCode(): number {
+    private getPriceCode(): number {
         return this.priceCode;
     }
 
@@ -21,6 +21,33 @@ export class Movie {
 
     public getTitle(): string {
         return this.title;
+    }
+
+    calculateAmount(daysRented: number) {
+        let amount = 0;
+        switch (this.getPriceCode()) {
+            case Movie.REGULAR:
+                amount += 2;
+                if (daysRented > 2)
+                    amount += (daysRented - 2) * 1.5;
+                break;
+            case Movie.NEW_RELEASE:
+                amount += daysRented * 3;
+                break;
+            case Movie.CHILDRENS:
+                amount += 1.5;
+                if (daysRented > 3)
+                    amount += (daysRented - 3) * 1.5;
+                break;
+        }
+        return amount;
+    }
+
+    calculateRenterPoints(daysRented: number) {
+        if (this.getPriceCode() == Movie.NEW_RELEASE
+          && daysRented > 1)
+            return 2;
+        return 1;
     }
 
 }
